@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نادي الاتحاد السوداني - تهنئة عيد الأضحى</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@400;500;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4BC;
+            --dark: #0a0a0a;
+            --darker: #050505;
+            --red: #8B0000;
+            --red-light: #C41E3A;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: var(--darker);
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Particle Canvas */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 2;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(20, 10, 5, 0.9) 50%, rgba(10, 10, 10, 0.95) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(139, 0, 0, 0.08) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        /* Animated border frame */
+        .frame-border {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid transparent;
+            border-image: linear-gradient(45deg, var(--gold), transparent, var(--gold), transparent, var(--gold)) 1;
+            animation: borderRotate 8s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes borderRotate {
+            0% {
+                border-image-source: linear-gradient(0deg, var(--gold), transparent, var(--gold));
+            }
+
+            25% {
+                border-image-source: linear-gradient(90deg, var(--gold), transparent, var(--gold));
+            }
+
+            50% {
+                border-image-source: linear-gradient(180deg, var(--gold), transparent, var(--gold));
+            }
+
+            75% {
+                border-image-source: linear-gradient(270deg, var(--gold), transparent, var(--gold));
+            }
+
+            100% {
+                border-image-source: linear-gradient(360deg, var(--gold), transparent, var(--gold));
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 2rem;
+        }
+
+        /* Eid Badge */
+        .eid-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--red), var(--red-light));
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 30px rgba(196, 30, 58, 0.4), 0 0 60px rgba(196, 30, 58, 0.2);
+            animation: pulseBadge 2s ease-in-out infinite;
+            letter-spacing: 2px;
+        }
+
+        @keyframes pulseBadge {
+
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(196, 30, 58, 0.4);
+            }
+
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 50px rgba(196, 30, 58, 0.6);
+            }
+        }
+
+        /* Main Title */
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), #fff, var(--gold), var(--gold-light));
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+            text-shadow: none;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .sub-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+        }
+
+        .started .sub-title {
+            animation: fadeInUp 1s ease forwards 0.5s;
+        }
+
+        .greeting-text {
+            font-size: 1.5rem;
+            color: #e0e0e0;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        .started .greeting-text {
+            animation: fadeInUp 1s ease forwards 1s;
+        }
+
+        .greeting-text span {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Club Logo Area */
+        .club-section {
+            margin: 2rem 0;
+            opacity: 0;
+        }
+
+        .started .club-section {
+            animation: fadeInUp 1s ease forwards 1.5s;
+        }
+
+        .club-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .club-sub {
+            font-size: 1.1rem;
+            color: #aaa;
+            font-weight: 500;
+        }
+
+        /* Image Gallery */
+        .gallery-section {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem;
+            background: linear-gradient(to bottom, transparent, rgba(10, 10, 10, 0.98));
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(50px);
+            opacity: 0;
+        }
+
+        .gallery-item.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(212, 175, 55, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            padding: 2rem 1.5rem 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.95rem;
+            color: #ccc;
+            margin-top: 0.3rem;
+        }
+
+        /* Eid Decoration Section */
+        .eid-section {
+            position: relative;
+            z-index: 2;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.1), rgba(212, 175, 55, 0.05));
+        }
+
+        .eid-images {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .eid-img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            border: 2px solid var(--gold);
+            transition: all 0.4s ease;
+        }
+
+        .eid-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: var(--darker);
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-text {
+            font-size: 1.2rem;
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+
+        .footer-sub {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Floating animation for decorative elements */
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+
+            .sub-title {
+                font-size: 1.4rem;
+            }
+
+            .greeting-text {
+                font-size: 1.1rem;
+            }
+
+            .club-name {
+                font-size: 1.4rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eid-img {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+
+        /* Music Toggle Button */
+        .music-control {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(10, 10, 10, 0.8);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            outline: none;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        /* Pulsing hint for first interaction */
+        .music-btn.pulse {
+            animation: btnPulse 2s infinite;
+        }
+
+        @keyframes btnPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(212, 175, 55, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+
+        /* Animated Music Waves */
+        .music-waves {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+            width: 20px;
+        }
+
+        .music-waves span {
+            display: block;
+            width: 3px;
+            background-color: var(--gold);
+            border-radius: 3px;
+            animation: wave-bounce 0.8s ease infinite alternate;
+            height: 100%;
+        }
+
+        .music-waves span:nth-child(2) {
+            animation-delay: 0.2s;
+            animation-duration: 0.6s;
+        }
+
+        .music-waves span:nth-child(3) {
+            animation-delay: 0.4s;
+            animation-duration: 0.7s;
+        }
+
+        .music-waves.paused span {
+            animation: none;
+            height: 4px;
+        }
+
+        @keyframes wave-bounce {
+            0% {
+                height: 4px;
+            }
+            100% {
+                height: 20px;
+            }
+        }
+
+        /* Welcome Screen Overlay */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #150a05 0%, #050505 100%);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .welcome-overlay.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .welcome-content {
+            max-width: 600px;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .welcome-logo {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 20px rgba(212,175,55,0.4));
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-desc {
+            font-size: 1.3rem;
+            color: #ddd;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .enter-btn {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: #000;
+            border: none;
+            padding: 1.2rem 3.5rem;
+            font-size: 1.4rem;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .enter-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--gold);
+            background: linear-gradient(135deg, var(--gold-light), #fff);
+        }
+
+        .welcome-ornament {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+            background-image: 
+                radial-gradient(circle at 10% 10%, var(--gold) 1px, transparent 1px),
+                radial-gradient(circle at 90% 90%, var(--gold) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Welcome Overlay Screen -->
+    <div id="welcome-screen" class="welcome-overlay">
+        <div class="welcome-ornament"></div>
+        <div class="welcome-content">
+            <img src="./file.enc" alt="شعار النادي" class="welcome-logo">
+            <h1 class="welcome-title">تهنئة عيد الأضحى المبارك 🌙</h1>
+            <p class="welcome-desc">
+                دعوة خاصة مقدمة من إدارة تمرين كيك بوكسينج وكونغ فو<br>
+                بـ <strong>نادي الاتحاد السوداني الرياضي</strong>
+            </p>
+            <button class="enter-btn" onclick="openGreeting()">
+                <span>افتح بطاقة التهنئة والاستماع</span>
+                <span>✉️</span>
+            </button>
+        </div>
+    </div>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop muted preload="auto">
+        <source src="./videoplayback.webm" type="audio/webm">
+        <source src="./videoplayback.webm">
+        <!-- Fallback: if no local file, nothing plays -->
+    </audio>
+
+    <!-- Music Control Button -->
+    <div class="music-control">
+        <button id="music-toggle-btn" class="music-btn pulse" onclick="toggleMusic(event)" aria-label="تشغيل/إيقاف الموسيقى">
+            <div id="music-waves" class="music-waves paused">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="frame-border"></div>
+        <div class="hero-content">
+            <div class="eid-badge">🐑 عيد الأضحى المبارك 1447 هـ</div>
+
+            <h1 class="main-title">إدارة تمرين كيك بوكسينج و كونغ فو</h1>
+            <h2 class="sub-title">نادي الاتحاد السوداني</h2>
+
+            <p class="greeting-text">
+                تتقدم إدارة التمرين بأحر التهاني وأطيب الأماني<br>
+                بمناسبة حلول <span>عيد الأضحى المبارك</span><br>
+                أعاده الله علينا وعليكم باليمن والبركات<br><br>
+                <span style="font-size: 1.8rem; display: block; margin-top: 1rem;">🌙 كل عام وأنتم بخير 🌙</span>
+            </p>
+
+            <div class="club-section">
+                <div class="club-name">نادي الاتحاد السوداني الرياضي</div>
+                <div class="club-sub">Sudanese United Sports Club</div>
+                <img src="./file.enc" alt="شعار النادي"
+                    style="width: 120px; height: 120px; object-fit: contain; margin-top: 1rem; filter: drop-shadow(0 0 15px rgba(212,175,55,0.4)); border-radius: 50%; border: 3px solid var(--gold);"
+                    class="float-anim">
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="section-title">تدريباتنا الاحترافية</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/static1.squarespace.com/2c3ad34319f5e319055c2dc30c918f0c8341ebcf.JPG"
+                    alt="كيك بوكسينج">
+                <div class="gallery-overlay">
+                    <h3>كيك بوكسينج احترافي</h3>
+                    <p>تدريبات على أعلى مستوى مع مدربين متخصصين</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.thefoundryfitness.com/843379138a5ec58508f61ff0fb90a4d089fd81f4.jpg"
+                    alt="تدريب كيك بوكسينج">
+                <div class="gallery-overlay">
+                    <h3>تدريبات الكيك بوكسينج</h3>
+                    <p>تقنيات الركل واللكم المتقدمة</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/shaolintemplechina.com/397e26d7afd181ee6b27e2459a240f24cc7a47b5.jpg"
+                    alt="كونغ فو شاولين">
+                <div class="gallery-overlay">
+                    <h3>كونغ فو شاولين</h3>
+                    <p>فنون قتالية تقليدية من أعماق التاريخ</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/headacademy.com.au/f0f2f70cbec42f27b3f2d6a3b2e7bea7ac4605f8.jpg"
+                    alt="تدريبات الكونغ فو">
+                <div class="gallery-overlay">
+                    <h3>تدريبات الكونغ فو الجماعية</h3>
+                    <p>تدريب الجماعة يبني الروح الرياضية</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/www.afaa.com/c725fabe20008ac76828bacbde13715832015a30.jpg"
+                    alt="تدريب احترافي">
+                <div class="gallery-overlay">
+                    <h3>تدريب احترافي</h3>
+                    <p>بناء اللياقة البدنية والقوة</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://kimi-web-img.moonshot.cn/img/yanchenwuguan.com/01a201da7b805bef1ee44a67106a378dc6e76a2a.jpg"
+                    alt="مبادئ الكونغ فو">
+                <div class="gallery-overlay">
+                    <h3>مبادئ الكونغ فو</h3>
+                    <p>الالتزام والانضباط والقوة الذهنية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eid Section -->
+    <section class="eid-section">
+        <h2 class="section-title">🌙 تهنئة العيد 🌙</h2>
+        <p style="font-size: 1.3rem; color: #ddd; max-width: 700px; margin: 0 auto 2rem; line-height: 1.8;">
+            تقبل الله منا ومنكم صالح الأعمال، وجعل أيامكم كلها أعياد،
+            وأسعد الله قلوبكم بنعيم الإيمان ورضا الرحمن
+        </p>
+        <div class="eid-images">
+            <img src="https://kimi-web-img.moonshot.cn/img/my-card.one/d7a2d13c282b014f7ce46025ff46a5f7f60b0ce3.png"
+                alt="عيد الأضحى" class="eid-img">
+            <img src="https://kimi-web-img.moonshot.cn/img/d1csarkz8obe9u.cloudfront.net/acd2ae1dcf085f72c0365f0cefb20fc7c47d510c.jpg"
+                alt="تهنئة العيد" class="eid-img">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">✨ عيد أضحى مبارك ✨</div>
+        <div class="footer-sub">إدارة تمرين كيك بوكسينج و كونغ فو - نادي الاتحاد السوداني</div>
+        <div style="margin-top: 1rem; font-size: 2rem;">🥋 🐑 🌙</div>
+    </footer>
+
+    <script>
+        // Particle System
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 80;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+                this.color = Math.random() > 0.5 ? 'rgba(212,175,55,' : 'rgba(196,30,58,';
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color + this.opacity + ')';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = 'rgba(212,175,55,' + (0.1 - distance / 1000) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Scroll Animation for Gallery
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Confetti Effect on Click
+        function createConfetti(x, y) {
+            const colors = ['#D4AF37', '#C41E3A', '#fff', '#F4E4BC'];
+            for (let i = 0; i < 30; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = x + 'px';
+                confetti.style.top = y + 'px';
+                confetti.style.width = '8px';
+                confetti.style.height = '8px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '9999';
+                document.body.appendChild(confetti);
+
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 150 + 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+
+                let posX = x;
+                let posY = y;
+                let opacity = 1;
+
+                const animate = () => {
+                    posX += vx * 0.02;
+                    posY += vy * 0.02 + 2;
+                    opacity -= 0.02;
+                    confetti.style.left = posX + 'px';
+                    confetti.style.top = posY + 'px';
+                    confetti.style.opacity = opacity;
+
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        confetti.remove();
+                    }
+                };
+                requestAnimationFrame(animate);
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            createConfetti(e.clientX, e.clientY);
+        });
+
+        // Auto confetti on load
+        setTimeout(() => {
+            if (!document.getElementById('welcome-screen')) {
+                createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+            }
+        }, 2000);
+
+        // Music Player Logic
+        const bgMusic = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-toggle-btn');
+        const musicWaves = document.getElementById('music-waves');
+
+        function updateMusicUI() {
+            if (bgMusic.paused || bgMusic.muted) {
+                musicWaves.classList.add('paused');
+                musicBtn.classList.add('pulse');
+            } else {
+                musicWaves.classList.remove('paused');
+                musicBtn.classList.remove('pulse');
+            }
+        }
+
+        // Try autoplay (muted) when page loads to preload
+        bgMusic.play().then(() => {
+            updateMusicUI();
+        }).catch(err => {
+            console.log("Autoplay prevented:", err);
+            updateMusicUI();
+        });
+
+        // Open greeting card, unmute audio and fade out screen
+        function openGreeting() {
+            // Unmute and play
+            bgMusic.muted = false;
+            bgMusic.play().then(() => {
+                updateMusicUI();
+            }).catch(err => {
+                console.log("Play failed on user action:", err);
+                updateMusicUI();
+            });
+
+            // Transition welcome screen out
+            const welcomeScreen = document.getElementById('welcome-screen');
+            if (welcomeScreen) {
+                welcomeScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    welcomeScreen.remove();
+                }, 1000);
+            }
+
+            // Start main text animations
+            document.body.classList.add('started');
+
+            // Fire multiple confetti waves for celebration
+            createConfetti(window.innerWidth / 2, window.innerHeight / 2);
+            setTimeout(() => {
+                createConfetti(window.innerWidth / 3, window.innerHeight / 3);
+                createConfetti(window.innerWidth * 2 / 3, window.innerHeight / 3);
+            }, 400);
+        }
+
+        // Manual toggle button handler
+        function toggleMusic(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            if (bgMusic.paused) {
+                bgMusic.muted = false;
+                bgMusic.play().then(updateMusicUI).catch(err => console.log(err));
+            } else if (bgMusic.muted) {
+                bgMusic.muted = false;
+                updateMusicUI();
+            } else {
+                bgMusic.pause();
+                updateMusicUI();
+            }
+        }
+    </script>
+</body>
+
+</html>
